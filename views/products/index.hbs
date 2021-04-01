@@ -1,0 +1,16 @@
+<div>
+    {{#each productList}}
+    <div class="card" style="width: 18rem; margin: auto;">
+    <img src="{{imgURL}}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{name}}</h5>
+        <p class="card-text">{{desc}}</p>
+        <p><strong>${{price}}</strong></p>
+        <a href="products/add-cart?_id={{ this._id }}" class="btn btn-primary">
+            <img src="../images/add-cart.png" style="height: 24px; width: 26px;">
+            Add to cart
+        </a>
+    </div>
+    </div>
+    {{/each}}
+</div>

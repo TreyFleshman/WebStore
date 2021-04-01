@@ -6,3 +6,24 @@ body {
 a {
   color: #00B7FF;
 }
+
+#map{
+    float: right;
+    height: 400px;
+    width: 450px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-65%);
+}
+
+.contact-info{
+    font-size: 18px;
+}
+
+.del-add-cart{
+    position: relative;
+    top: -8px;
+    left: 65px;
+}

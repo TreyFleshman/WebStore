@@ -1,0 +1,27 @@
+<div>
+
+  </br>
+
+  <h4 style="text-align: center;">Item added to cart</h4>
+
+  </br>
+
+  <div class="card mb-3" style="max-width: 575px; margin:auto;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{product.imgURL}}" alt="...">
+      </div>
+      <div class="col-md-8" style="font-size: 24px;">
+        <div class="card-body">
+          <h2 class="card-title">{{product.name}}</h2>           
+          <p class="card-text">{{product.desc}}</p> </br> </br>
+          <p class="card-text "><strong>${{product.price}}</strong></p>
+        </div>
+      </div>
+        <a href="/products/cart" class="btn btn-primary" style="margin: auto;">
+          View Cart
+        </a>
+    </div>
+  </div>
+
+</div>

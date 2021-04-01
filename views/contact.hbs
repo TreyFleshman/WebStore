@@ -1,0 +1,70 @@
+<script>
+    
+    let map;
+    function initMap(data) {
+        map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: new google.maps.LatLng(39.63232807214292, -86.12627698177913)
+      });
+        const marker = new google.maps.Marker({
+          position: new google.maps.LatLng(39.63172807214292, -86.12527698177913),
+          map: map,
+        });
+
+    }
+
+</script>
+<body>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col contact-info">
+        <br>
+        <h1>Contact Us</h1>
+        <br>
+        <p><i>Email: </i>WebStore@gmail.com</p>
+        <p><i>Phone: </i>+1 (123)-456-7890</p>
+        <p><i>Address: </i>123 Abc Lane, GreenWood, Indiana</p>
+        <br>
+        <table class="table" style="width: 24rem;">
+        <thead>
+          <tr>
+            <th scope="col"> Hours of Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Monday</th>
+            <td>9:00am-5:00pm</td>
+          </tr>
+          <tr><th scope="row">Tuesday</th>
+            <td>9:00am-5:00pm</td>
+          </tr>
+          <tr><th scope="row">Wednesday</th>
+            <td>9:00am-5:00pm</td>
+          </tr>
+          <tr><th scope="row">Thursday</th>
+            <td>9:00am-5:00pm</td>
+          </tr>
+          <tr><th scope="row">Friday</th>
+            <td>9:00am-5:00pm</td>
+          </tr>
+          <tr><th scope="row">Saturday</th>
+            <td>9:00am-5:00pm</td>
+          </tr>
+          <tr><th scope="row">Sunday</th>
+            <td>Closed</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ_MWwSZ9hUYlQjAVa0PiLUgzvJlYQYuQ&callback=initMap&libraries=&v=weekly"
+    async
+></script>
+
+</body>
