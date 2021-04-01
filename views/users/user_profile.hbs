@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+
+<div class="card mb-3" style="max-width: 850px; margin:auto;">
+  <div class="row g-0">
+    <div class="col-md-4" style="width:150px;">
+      <img class="profile-img" src="{{ userImage }}" style="border-radius: 65px;"/>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title"><strong>{{ displayName }}'s Profile</strong></h3>
+        <p class="card-text">{{ email }}</p>
+
+        <br/>
+
+        <a class="btn btn-outline-success" href="/users/logout">Log Out</a></small>
+      </div>
+    </div>
+  </div>
+</div>

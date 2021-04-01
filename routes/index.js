@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* GET contact page. */
+router.get('/contact', function(req, res, next) {
+  res.render('contactUs', { title: 'Express' });
+});
+
 module.exports = router;
