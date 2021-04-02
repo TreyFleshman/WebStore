@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const CartItemSchema = new Schema( {
+  user_id: {
+    type: String
+  },
   name: {
     type: String
   },

@@ -1,4 +1,4 @@
-<h1>{{title}}</h1>
+<h1>Profile</h1>
 
 <div class="card mb-3" style="max-width: 850px; margin:auto;">
   <div class="row g-0">
@@ -11,6 +11,33 @@
         <p class="card-text">{{ email }}</p>
 
         <br/>
+
+        <div style="border: 1px solid black; padding: 5px;">
+            <h4>{{ displayName }}'s Orders</h4>
+
+            <table class="table" style="width: 500px; margin: auto" >
+            <thead>
+                <tr>
+                <th scope="col">Order #</th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            {{#each orders}}
+            <tbody>
+                <tr>
+                <th scope="row">#{{_id}}</th>
+                <td>${{total}}</td>
+                <td><a href="/checkout/order?_id={{ this._id }}">
+                <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
+                </a></td>
+                </tr>
+            </tbody>
+            </table>
+            {{/each}}
+        </div>
+
+        <br>
 
         <a class="btn btn-outline-success" href="/users/logout">Log Out</a></small>
       </div>

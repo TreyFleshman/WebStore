@@ -7,6 +7,8 @@ var GoogleStrategy = require ('passport-google-oauth').OAuth2Strategy;
 var User = require('../models/User.js');
 
 const mongoose = require('mongoose');
+require('../models/Order');
+const Order = mongoose.model('Order');
 
 require('../services/passport_google');
 
@@ -15,13 +17,17 @@ router.get('/', function(req, res, next) {
   // If user loged in
   if(req.isAuthenticated() ) {
     loggedInUser = req.user;
-    res.render('users/user_profile', {
-    title: 'Profile',
-    displayName: loggedInUser.displayName,
-    email: loggedInUser.email,
-    userImage: loggedInUser.picture,
+    Order.find({user_id: req.user.providerID})
+    .then(orders => {
+        res.render('users/user_profile', {
+        title: 'Profile | Web Store',
+        displayName: loggedInUser.displayName,
+        email: loggedInUser.email,
+        userImage: loggedInUser.picture,
+        orders: orders
+        })
     })
-  } else { res.render('users/user_no_profile'); }
+  } else { res.render('users/not_auth'); }
 });
 
 /* GET to Google login */

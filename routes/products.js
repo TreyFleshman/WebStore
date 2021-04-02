@@ -28,11 +28,12 @@ router.get('/', (req, res, next) => {
 });
 
 /* GET add to cart */
-router.get('/add-cart', (req, res, next) => {
+router.get('/add-cart',ensureAuth, (req, res, next) => {
 
   Product.findOne({ _id: req.query._id })
   .then( Product => {
       const newCartItem = new CartItem( {
+        user_id: req.user.providerID,
         name: Product.name,
         desc: Product.desc,
         price: Product.price,
@@ -46,9 +47,9 @@ router.get('/add-cart', (req, res, next) => {
 });
 
 /* GET to cart */
-router.get('/cart', (req, res, next) => {
+router.get('/cart', ensureAuth, (req, res, next) => {
   var total = 0;
-  CartItem.find({})
+  CartItem.find({user_id: req.user.providerID})
     .then( CartItem => {
     for(i=0; i<CartItem.length; i++){
         total = total + CartItem[i].price;
