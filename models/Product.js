@@ -15,7 +15,7 @@ const ProductSchema = new Schema( {
   imgURL: {
     type: String
   }
-
+  
 } );
 
 mongoose.model('Products', ProductSchema);
