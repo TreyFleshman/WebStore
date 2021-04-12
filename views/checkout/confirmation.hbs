@@ -1,0 +1,68 @@
+<br>
+
+<div class="card" style="width: 48rem; margin: auto;">
+  <div class="card-body">
+
+    <img src="../images/header.png" style="display:block; margin:auto; :150px; width:500px;"><br>
+
+    <h5 class="card-title" style="text-align: center;">Confirmation # {{orderDetails.charge.id}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted" style="text-align: center;">Receipt #1497-3696 </h6>
+
+    <br/>
+
+    <div class="container"  style="text-align:center;">
+      <div class="row" >
+        <div class="col">
+          <p class="text-muted">Ammount Paid</p>
+          <p>${{orderDetails.total}}</p>
+        </div>
+        <div class="col">
+          <p class="text-muted">Date Paid</p>
+          <p>{{orderDetails.order_date}}</p>
+        </div>
+        <div class="col">
+          <p class="text-muted">Payment Method</p>
+          <p><img src="../images/visa.png" style="height: 36px; width: 36px;"> **** {{orderDetails.charge.source.last4}}</p>
+        </div>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <p class="text-muted" style="padding-left: 50px;">Summary</p>
+    <div>
+        {{#each orderDetails.items}}
+        <div class="card d-flex" style="width: 625px; margin: auto;">
+        <div class="row">
+            <div class="col">
+            <img src="{{imgURL}}" style="height: 100px; width: 100px; padding:5px;">
+            </div>
+            <div class="col align-self-center">
+            <p class="card-text"><strong>{{name}}</strong></p>
+            </div>
+            <div class="col align-self-center">
+            <p class="card-text">{{desc}}</p>
+            </div>
+            <div class="col align-self-center">
+            <p class="card-text">${{price}}</p>
+            </div>
+        </div>
+        </div>
+        {{/each}}
+    </div>
+    <hr style="width: 36rem; margin: auto;"><br>
+    <div class="d-flex justify-content-between" style="width: 10rem; margin: auto;">
+      <b><h3>Total: </h3></b>
+      <b><h3> ${{orderDetails.total}}</h3></b>
+    </div> <hr>
+    
+    <div  style="text-align: center;">    
+        <h4 class="text-muted">Shipping Info</h4>
+        <p>{{orderDetails.firstName}} {{orderDetails.lastName}}</p>
+        <p>{{orderDetails.address}} {{orderDetails.address2}}</p>
+        <p>{{orderDetails.city}} ,{{orderDetails.state}} {{orderDetails.zip}}</p>
+     </div>
+
+  </div>
+</div>

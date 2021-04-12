@@ -42,6 +42,12 @@ const OrderSchema = new Schema( {
   },
   items:{
     type: {}
+  },
+  charge:{
+      type: Object
+  },
+  customer:{
+      type: Object
   }
 
 } );
