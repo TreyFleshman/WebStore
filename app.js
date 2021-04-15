@@ -20,6 +20,8 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo');
 var { v4: uuidv4 } = require('uuid');
 
+
+
 var app = express();
 
 // CONNECT to MongoDB via Mongoose
@@ -56,8 +58,9 @@ app.set('view engine', 'hbs');
 
 // Login / logout Views
 app.use(function (req, res, next ) {
+    var loggedInUser = req.user;
     if (req.isAuthenticated()) {
-        app.set('view options', { layout: 'layout_user'});
+        app.set('view options', { layout: 'layout_user', userImage: loggedInUser.picture});
     } else {
         app.set('view options', { layout: 'layout'});
     }

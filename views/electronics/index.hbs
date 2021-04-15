@@ -1,3 +1,30 @@
+<div class="container">
+  <header class="py-3 mb-4 border-bottom">
+
+    <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="../images/filter.png" height="24px" width="24px">
+        Dropdown button
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="/electronics/sortPriceDesc">
+        <img src="../images/sort-down.svg" height="24px" width="24px">
+        Filter price low-high
+        </a></li>
+        <li><a class="dropdown-item" href="/electronics/sortPriceAsc">
+        <img src="../images/sort-up.svg" height="24px" width="24px">
+        Filter price high-low
+        </a></li>
+        <li><a class="dropdown-item" href="/electronics/">
+          <img src="../images/remove.svg" height="24px" width="24px">
+          Remove filter
+        </a></li>
+    </ul>
+    </div>
+
+  </header>
+</div>
+
 <div style="flex-wrap: wrap;" class="gap-3 d-flex justify-content-center">
 
     {{#each x}}

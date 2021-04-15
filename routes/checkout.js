@@ -16,7 +16,7 @@ const ensureAuth = (req, res, next) => {
     // authenticated
     next();
   } else {
-    res.render('users/not_auth')
+    res.render('users/not_auth', {userImage: req.user.picture})
   }
 }
 
@@ -41,6 +41,7 @@ router.get('/checkout', (req, res, next) => {
      total,
      final,
      tax,
+     userImage: req.user.picture     
     })
   })
 }); 
@@ -54,6 +55,7 @@ router.get('/order', (req, res, next) => {
           res.render('checkout/confirmation', {
             title: "Order Details | Web Store",
             orderDetails: orders,
+            userImage: req.user.picture
           })
       )
   )

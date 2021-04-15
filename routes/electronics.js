@@ -1,6 +1,7 @@
 require('dotenv').config()
 var express = require('express');
 var router = express.Router();
+var fetch = require('node-fetch');
 
 const mongoose = require('mongoose');
 require('../models/CartItem');
@@ -14,14 +15,31 @@ const ensureAuth = (req, res, next) => {
     // authenticated
     next();
   } else {
-    res.render('users/not_auth')
+    res.render('users/not_auth', {userImage: req.user.picture})
   }
 }
 
 router.get('/', (req, res, next) => {
     Electronic.find({})
     .then( x => {
-      res.render('electronics/index', { title: "Products | Web Store", x:x})
+      res.render('electronics/index', { title: "Products | Web Store", x:x, userImage: req.user.picture})
+    })
+});
+
+router.get('/sortPriceDesc', (req,res,next) => {
+    fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPriceDesc_Electronics')
+    .then(res => res.json())
+    .then( (data) => {
+       res.render('electronics/index', { title: "Products | Web Store", x:data, userImage: req.user.picture})
+    })
+});
+
+router.get('/sortPriceAsc', (req,res,next) => {
+    fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPriceDesc_Electronics')
+    .then(res => res.json())
+    .then( data => data.reverse())
+    .then( (data) => {
+       res.render('electronics/index', { title: "Products | Web Store", x:data, userImage: req.user.picture})
     })
 });
 
@@ -39,7 +57,12 @@ router.get('/add-cart',ensureAuth, (req, res, next) => {
       } )
     newCartItem
       .save()
-      .then( () => { res.render(`electronics/add-cart`, { title: "Cart Item | Web Store", electronic: Electronic, newCartItem} ) } )
+      .then( () => { res.render(`electronics/add-cart`, { 
+        title: "Cart Item | Web Store", 
+        electronic: Electronic,
+        newCartItem,
+        userImage: req.user.picture
+      } ) } )
       .catch( err => console.log(err) )
     } )
 });
@@ -59,7 +82,8 @@ router.get('/cart', ensureAuth, (req, res, next) => {
     final = final.toFixed(2);
     res.render('products/cart', {
      title: "Cart | Web Store",
-     CartItems: CartItem,
+     userImage: req.user.picture,
+     CartItems: CartItem,     
      total,
      final,
      tax,

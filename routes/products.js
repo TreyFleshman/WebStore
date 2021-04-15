@@ -16,7 +16,7 @@ const ensureAuth = (req, res, next) => {
     // authenticated
     next();
   } else {
-    res.render('users/not_auth')
+    res.render('users/not_auth', {userImage: req.user.picture})
   }
 }
 
@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
 
   Product.find({})
   .then( Products => {
-    res.render('products/index', { title: "Products | Web Store", productList: Products})
+    res.render('products/index', { title: "Products | Web Store", productList: Products, userImage: req.user.picture})
   });
 });
 
@@ -43,7 +43,12 @@ router.get('/add-cart',ensureAuth, (req, res, next) => {
       } )
     newCartItem
       .save()
-      .then( () => { res.render(`products/add-cart`, { title: "Cart Item | Web Store", product: Product, newCartItem} ) } )
+      .then( () => { res.render(`products/add-cart`, { 
+        title: "Cart Item | Web Store",
+        userImage: req.user.picture,
+        product: Product,
+        newCartItem
+      } ) } )
       .catch( err => console.log(err) )
     } )
 });
@@ -63,6 +68,7 @@ router.get('/cart', ensureAuth, (req, res, next) => {
     final = final.toFixed(2);
     res.render('products/cart', {
      title: "Cart | Web Store",
+     userImage: req.user.picture,
      CartItems: CartItem,
      total,
      final,
