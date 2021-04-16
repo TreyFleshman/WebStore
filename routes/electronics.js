@@ -15,14 +15,18 @@ const ensureAuth = (req, res, next) => {
     // authenticated
     next();
   } else {
-    res.render('users/not_auth', {userImage: req.user.picture})
+    res.render('users/not_auth')
   }
 }
 
 router.get('/', (req, res, next) => {
     Electronic.find({})
     .then( x => {
-      res.render('electronics/index', { title: "Products | Web Store", x:x, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Products | Web Store", x:x, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Products | Web Store", x:x})
+      }
     })
 });
 
@@ -30,7 +34,11 @@ router.get('/sortPriceDesc', (req,res,next) => {
     fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPriceDesc_Electronics')
     .then(res => res.json())
     .then( (data) => {
-       res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data})
+      }
     })
 });
 
@@ -39,7 +47,11 @@ router.get('/sortPriceAsc', (req,res,next) => {
     .then(res => res.json())
     .then( data => data.reverse())
     .then( (data) => {
-       res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data})
+      }
     })
 });
 
@@ -47,7 +59,11 @@ router.get('/sortAtoZ', (req,res,next) => {
     fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortAtoZ_Electronics')
     .then(res => res.json())
     .then( (AtoZ) => {
-       res.render('electronics/index', { title: "Electronics | Web Store", x:AtoZ, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:AtoZ, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:AtoZ})
+      }
     })
 });
 
@@ -56,12 +72,16 @@ router.get('/sortZtoA', (req,res,next) => {
     .then(res => res.json())
     .then( ZtoA => ZtoA.reverse())
     .then( (ZtoA) => {
-       res.render('electronics/index', { title: "Electronics | Web Store", x:ZtoA, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:ZtoA, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:ZtoA})
+      }
     })
 });
 
 /* GET add to cart */
-router.get('/add-cart',ensureAuth, (req, res, next) => {
+router.get('/add-cart', ensureAuth, (req, res, next) => {
 
   Electronic.findOne({ _id: req.query._id })
   .then( Electronic => {
@@ -104,7 +124,6 @@ router.get('/cart', ensureAuth, (req, res, next) => {
      total,
      final,
      tax,
-     
     })
   })
 });

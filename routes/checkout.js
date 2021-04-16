@@ -16,12 +16,12 @@ const ensureAuth = (req, res, next) => {
     // authenticated
     next();
   } else {
-    res.render('users/not_auth', {userImage: req.user.picture})
+    res.render('users/not_auth')
   }
 }
 
 /* GET to checkout */
-router.get('/checkout', (req, res, next) => {
+router.get('/checkout', ensureAuth, (req, res, next) => {
   var total = 0;
   CartItem.find({user_id: req.user.providerID})
     .then( CartItem => {
@@ -47,18 +47,18 @@ router.get('/checkout', (req, res, next) => {
 }); 
 
 /* GET to order details */
-router.get('/order', (req, res, next) => {
+router.get('/order', ensureAuth, (req, res, next) => {
   CartItem.deleteMany({user_id: req.user.providerID})
-  .then(
+    .then(
       Order.findOne({_id: req.query._id})
-      .then( orders =>
+        .then( orders =>
           res.render('checkout/confirmation', {
             title: "Order Details | Web Store",
             orderDetails: orders,
             userImage: req.user.picture
           })
-      )
-  )
+        )
+    )
 });
 
 /* POST to create Order */

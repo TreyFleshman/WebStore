@@ -17,7 +17,7 @@ const ensureAuth = (req, res, next) => {
     // authenticated
     next();
   } else {
-    res.render('users/not_auth', {userImage: req.user.picture})
+    res.render('users/not_auth')
   }
 }
 
@@ -26,7 +26,11 @@ router.get('/', (req, res, next) => {
 
   Product.find({})
   .then( Products => {
-    res.render('products/index', { title: "Products | Web Store", productList: Products, userImage: req.user.picture})
+    if (req.isAuthenticated()) {
+      res.render('products/index', { title: "Products | Web Store", productList: Products, userImage: req.user.picture})
+    } else {
+      res.render('products/index', { title: "Products | Web Store", productList: Products})
+    } 
   });
 });
 
@@ -34,7 +38,11 @@ router.get('/sortPriceDesc', (req,res,next) => {
     fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPrice_Products')
     .then(res => res.json())
     .then( (data) => {
-       res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+      } else {
+        res.render('products/index', { title: "Products | Web Store", productList:data})
+      } 
     })
 });
 
@@ -43,7 +51,11 @@ router.get('/sortPriceAsc', (req,res,next) => {
     .then(res => res.json())
     .then( data => data.reverse())
     .then( (data) => {
-       res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+      } else {
+        res.render('products/index', { title: "Products | Web Store", productList:data})
+      }
     })
 });
 
@@ -51,7 +63,11 @@ router.get('/sortAtoZ', (req,res,next) => {
     fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortAtoZ_Products')
     .then(res => res.json())
     .then( (AtoZ) => {
-       res.render('products/index', { title: "Products | Web Store", productList:AtoZ, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('products/index', { title: "Products | Web Store", productList:AtoZ, userImage: req.user.picture})
+      } else {
+        res.render('products/index', { title: "Products | Web Store", productList:AtoZ})
+      }
     })
 });
 
@@ -60,7 +76,11 @@ router.get('/sortZtoA', (req,res,next) => {
     .then(res => res.json())
     .then( AtoZ => AtoZ.reverse())
     .then( (AtoA) => {
-       res.render('products/index', { title: "Products | Web Store", productList:AtoA, userImage: req.user.picture})
+      if (req.isAuthenticated()) {
+        res.render('products/index', { title: "Products | Web Store", productList:AtoA, userImage: req.user.picture})
+      } else {
+        res.render('products/index', { title: "Products | Web Store", productList:AtoA})
+      }
     })
 });
 
@@ -78,14 +98,16 @@ router.get('/add-cart',ensureAuth, (req, res, next) => {
       } )
     newCartItem
       .save()
-      .then( () => { res.render(`products/add-cart`, { 
-        title: "Cart Item | Web Store",
-        userImage: req.user.picture,
-        product: Product,
-        newCartItem
-      } ) } )
-      .catch( err => console.log(err) )
-    } )
+      .then( () => { 
+        res.render(`products/add-cart`, { 
+          title: "Cart Item | Web Store",
+          userImage: req.user.picture,
+          product: Product,
+          newCartItem
+        }) 
+      })
+    .catch( err => console.log(err) )
+  })
 });
 
 /* GET to cart */
@@ -120,6 +142,5 @@ router.get('/cart-item-del', (req, res, next) => {
     res.redirect('/products/cart')
   )
 });
-
 
 module.exports = router;

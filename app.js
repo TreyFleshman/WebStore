@@ -57,10 +57,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // Login / logout Views
-app.use(function (req, res, next ) {
-    var loggedInUser = req.user;
+app.use(function (req, res, next ) {    
     if (req.isAuthenticated()) {
-        app.set('view options', { layout: 'layout_user', userImage: loggedInUser.picture});
+        app.set('view options', { layout: 'layout_user'});
     } else {
         app.set('view options', { layout: 'layout'});
     }
