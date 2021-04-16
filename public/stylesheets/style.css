@@ -48,3 +48,10 @@ a {
     right: 40px;
 }
 
+.cart-nav-btn{
+    width: 60px;
+    color:none;
+    padding-top:10px;
+    padding-bottom:10px;
+    text-decoration: none;
+}

@@ -30,7 +30,7 @@ router.get('/sortPriceDesc', (req,res,next) => {
     fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPriceDesc_Electronics')
     .then(res => res.json())
     .then( (data) => {
-       res.render('electronics/index', { title: "Products | Web Store", x:data, userImage: req.user.picture})
+       res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
     })
 });
 
@@ -39,7 +39,24 @@ router.get('/sortPriceAsc', (req,res,next) => {
     .then(res => res.json())
     .then( data => data.reverse())
     .then( (data) => {
-       res.render('electronics/index', { title: "Products | Web Store", x:data, userImage: req.user.picture})
+       res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+    })
+});
+
+router.get('/sortAtoZ', (req,res,next) => {
+    fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortAtoZ_Electronics')
+    .then(res => res.json())
+    .then( (AtoZ) => {
+       res.render('electronics/index', { title: "Electronics | Web Store", x:AtoZ, userImage: req.user.picture})
+    })
+});
+
+router.get('/sortZtoA', (req,res,next) => {
+    fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortAtoZ_Electronics')
+    .then(res => res.json())
+    .then( ZtoA => ZtoA.reverse())
+    .then( (ZtoA) => {
+       res.render('electronics/index', { title: "Electronics | Web Store", x:ZtoA, userImage: req.user.picture})
     })
 });
 

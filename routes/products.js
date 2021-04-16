@@ -1,6 +1,7 @@
 require('dotenv').config()
 var express = require('express');
 var router = express.Router();
+var fetch = require('node-fetch');
 
 const mongoose = require('mongoose');
 require('../models/Product');
@@ -27,6 +28,40 @@ router.get('/', (req, res, next) => {
   .then( Products => {
     res.render('products/index', { title: "Products | Web Store", productList: Products, userImage: req.user.picture})
   });
+});
+
+router.get('/sortPriceDesc', (req,res,next) => {
+    fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPrice_Products')
+    .then(res => res.json())
+    .then( (data) => {
+       res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+    })
+});
+
+router.get('/sortPriceAsc', (req,res,next) => {
+    fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPrice_Products')
+    .then(res => res.json())
+    .then( data => data.reverse())
+    .then( (data) => {
+       res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+    })
+});
+
+router.get('/sortAtoZ', (req,res,next) => {
+    fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortAtoZ_Products')
+    .then(res => res.json())
+    .then( (AtoZ) => {
+       res.render('products/index', { title: "Products | Web Store", productList:AtoZ, userImage: req.user.picture})
+    })
+});
+
+router.get('/sortZtoA', (req,res,next) => {
+    fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortAtoZ_Products')
+    .then(res => res.json())
+    .then( AtoZ => AtoZ.reverse())
+    .then( (AtoA) => {
+       res.render('products/index', { title: "Products | Web Store", productList:AtoA, userImage: req.user.picture})
+    })
 });
 
 /* GET add to cart */
