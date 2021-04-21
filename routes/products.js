@@ -34,6 +34,50 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.get('/sortPriceUnder15', (req,res,next) => {
+    Product.aggregate([{ $match: { price: { $lte: 15 } } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+      } else {
+        res.render('products/index', { title: "Products | Web Store", productList:data})
+      }
+    })
+});
+
+router.get('/sortPriceUnder25', (req,res,next) => {
+    Product.aggregate([{ $match: { price: {$gte: 15, $lte: 25} } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+      } else {
+        res.render('products/index', { title: "Products | Web Store", productList:data})
+      }
+    })
+});
+
+router.get('/sortPriceUnder50', (req,res,next) => {
+    Product.aggregate([{ $match: { price: {$gte: 25, $lte: 50} } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+      } else {
+        res.render('products/index', { title: "Products | Web Store", productList:data})
+      }
+    })
+});
+
+router.get('/sortPriceOver50', (req,res,next) => {
+    Product.aggregate([{ $match: { price: {$gte: 50.01} } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('products/index', { title: "Products | Web Store", productList:data, userImage: req.user.picture})
+      } else {
+        res.render('products/index', { title: "Products | Web Store", productList:data})
+      }
+    })
+});
+
 router.get('/sortPriceDesc', (req,res,next) => {
     fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPrice_Products')
     .then(res => res.json())
@@ -82,6 +126,7 @@ router.get('/sortZtoA', (req,res,next) => {
         res.render('products/index', { title: "Products | Web Store", productList:AtoA})
       }
     })
+    
 });
 
 /* GET add to cart */

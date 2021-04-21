@@ -1,7 +1,7 @@
 <div class="container">
-  <header class="py-3 mb-4 border-bottom">
+  <header class="py-3 mb-4 border-bottom d-flex">
 
-    <div class="dropdown">
+    <div class="dropdown" style="padding-right: 10px;">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="../images/filter.png" height="24px" width="24px">
         Filter Products
@@ -24,6 +24,34 @@
           Filter name Z to A
         </a></li>
 
+        <li><hr class="dropdown-divider"></li>
+
+        <li><a class="dropdown-item" href="/products/">
+          <img src="../images/remove.svg" height="24px" width="24px">
+          Remove filter
+        </a></li>
+    </ul>
+    </div>
+
+    <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="../images/filter-price.png" height="24px" width="28px">
+        Filter By Price
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="/products/sortPriceUnder15">
+          Under $15
+        </a></li>        
+        <li><a class="dropdown-item" href="/products/sortPriceUnder25">
+          Between $15 and $25
+        </a></li>
+        <li><a class="dropdown-item" href="/products/sortPriceUnder50">
+          Between $25 and $50
+        </a></li>
+        <li><a class="dropdown-item" href="/products/sortPriceOver50">
+          Above $50
+        </a></li>
+        
         <li><hr class="dropdown-divider"></li>
 
         <li><a class="dropdown-item" href="/products/">

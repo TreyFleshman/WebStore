@@ -30,6 +30,61 @@ router.get('/', (req, res, next) => {
     })
 });
 
+router.get('/sortPriceUnder25', (req,res,next) => {
+    Electronic.aggregate([{ $match: { price: { $lte: 25 } } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data})
+      }
+    })
+});
+
+router.get('/sortPriceUnder50', (req,res,next) => {
+    Electronic.aggregate([{ $match: { price: {$gte: 25, $lte: 50} } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data})
+      }
+    })
+});
+
+router.get('/sortPriceUnder75', (req,res,next) => {
+    Electronic.aggregate([{ $match: { price: {$gte: 50, $lte: 75} } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data})
+      }
+    })
+});
+
+router.get('/sortPriceUnder100', (req,res,next) => {
+    Electronic.aggregate([{ $match: { price: {$gte: 75, $lte: 100} } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data})
+      }
+    })
+});
+
+router.get('/sortPriceOver100', (req,res,next) => {
+    Electronic.aggregate([{ $match: { price: {$gte: 100} } }])
+    .then( (data) => {
+      if (req.isAuthenticated()) {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data, userImage: req.user.picture})
+      } else {
+        res.render('electronics/index', { title: "Electronics | Web Store", x:data})
+      }
+    })
+});
+
 router.get('/sortPriceDesc', (req,res,next) => {
     fetch('https://us-central1-cit412-treyfles-final-webstore.cloudfunctions.net/SortByPriceDesc_Electronics')
     .then(res => res.json())
