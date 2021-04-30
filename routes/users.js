@@ -1,10 +1,11 @@
 require('dotenv').config()
 var express = require('express');
 var router = express.Router();
-var session = require('express-session');
 var passport = require('passport');
-var GoogleStrategy = require ('passport-google-oauth').OAuth2Strategy;
 var User = require('../models/User.js');
+var session = require('express-session');
+var connection = require('../services/db');
+var GoogleStrategy = require ('passport-google-oauth').OAuth2Strategy;
 
 const mongoose = require('mongoose');
 require('../models/Order');
@@ -13,7 +14,7 @@ const Order = mongoose.model('Order');
 require('../services/passport_google');
 
 /* GET user profile */
-router.get('/', function(req, res, next) {
+router.get('/',  async function(req, res, next) {
   // If user loged in
   if(req.isAuthenticated() ) {
     loggedInUser = req.user;
@@ -55,3 +56,21 @@ router.get('/return',
 
 
 module.exports = router;
+
+
+const selectUsers = async function(callback) {
+  console.log('Selecting Users to view!');
+
+    connection.query(`SELECT * FROM user`,
+    function(error, results, fields){
+        if (error) throw error;
+        callback(results);
+    }) 
+};
+
+
+/* //Select All Users
+selectUsers( function (results){
+    console.log(results);
+})
+*/
