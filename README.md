@@ -1,7 +1,5 @@
 # E-Commerce Web Store
 
-https://cit412-treyfles-final-webstore.uc.r.appspot.com/
-
 ## Page Description
 
 ### Home
