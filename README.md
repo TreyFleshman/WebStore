@@ -1,4 +1,4 @@
-# CIT Final Project Web Store
+# E-Commerece Web Store
 
 https://cit412-treyfles-final-webstore.uc.r.appspot.com/
 
