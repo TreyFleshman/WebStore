@@ -1,4 +1,4 @@
-# E-Commerece Web Store
+# E-Commerce Web Store
 
 https://cit412-treyfles-final-webstore.uc.r.appspot.com/
 
@@ -57,9 +57,3 @@ The other set of filters that filter products by price range use a Mongo Aggrega
 * Mongo DB
 * Stripe Payment Processing
 * Google Authentication
-
-
-### Dev Team 
-Trey Fleshman, Austin Fickle, Nancy Bailey, Douglas Greathouse and Damanvir Chohan
-
-*IUPUI CIT 41200 Fall Semester 2020-2021*
